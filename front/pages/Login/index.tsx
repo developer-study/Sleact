@@ -8,7 +8,7 @@ import { Button, Error, Form, Header, Input, Label, LinkContainer } from '@pages
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const { data, error, mutate } = useSWR('http://localhost:3095/api/users', fetcher);
+  const { data, error, mutate } = useSWR('/api/users', fetcher);
 
   const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput('');
@@ -19,7 +19,7 @@ const Login = () => {
       e.preventDefault();
       setLogInError(false);
       axios
-        .post('http://localhost:3095/api/users/login', { email, password }, { withCredentials: true })
+        .post('/api/users/login', { email, password }, { withCredentials: true })
         .then((response) => {
           mutate(response.data, false);
         })
